@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+@@include('html/head.html', {
+"title": "Спасибо",
+"keywords": "эвакуатор",
+"description": "круглосуточный эвакуатор в Петрозаводске"
+})
+
+<body>
+   <div class="wrapper">
+
+      @@include('html/header.html', {})
+
+      <main class="page" id="main">
+
+         <div class="thx_page">
+            <div class="thx_page__container _container">
+               <div class="thx_page__header">
+                  <h1 class="_line">Спасибо! Заявка принята!</h1>
+                  <span>В ближайшее время мы свяжемся с Вами</span>
+               </div>
+               <div class="thx_page__link">
+                  <a href="/" class="_order">Назад</a>
+               </div>
+
+            </div>
+         </div>
+
+      </main>
+
+      @@include('html/footer.html', {})
+
+   </div>
+
+   @@include('html/popups.html', {})
+
+   <script src="js/app.min.js"></script>
+
+</body>
+
+</html>

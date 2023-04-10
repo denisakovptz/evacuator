@@ -1,0 +1,72 @@
+// Модальные окна ==========================================================
+// =========================================================================
+
+.popup {
+   position: fixed;
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   background-color: rgba(255, 255, 255, 0.8);
+   z-index: 100;
+   opacity: 0;
+   visibility: hidden;
+   overflow-y: auto;
+   overflow-x: hidden;
+   transition: all 0.3s ease 0s;
+   // .popup__body
+   &__body {
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 10px;
+   }
+
+   // .popup__content
+   &__content {
+      padding: 25px 30px 50px 30px;
+      background-color: #36393b;
+      min-width: 600px;
+      text-align: center;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      @media (max-width: $md3) {
+         min-width: 100%;
+      }
+   }
+
+   // .popup__close
+   &__close {
+      width: 25px;
+      height: 25px;
+      background: url(../img/close.png) no-repeat;
+      align-self: flex-end;
+      margin-bottom: 10px;
+      cursor: pointer;
+   }
+
+   // .popup__header
+   &__header {
+      font-size: 24px;
+      margin-bottom: 30px;
+      line-height: 130%;
+   }
+
+   // .popup__text
+   &__text {
+      font-size: 20px;
+   }
+
+   // .popup__input
+   &__input {
+      display: block;
+      width: 100%;
+      margin-bottom: 20px;
+   }
+   &.open {
+      opacity: 1;
+      visibility: visible;
+   }
+}

@@ -1,0 +1,1313 @@
+@import "reset";
+@import "fonts";
+
+// Переменные ======================================================
+
+$MaxWidthContainer: 960px;
+$md1: $MaxWidthContainer + 12px;
+$md2: 991.98px;
+$md3: 767.98px;
+$md4: 479.98px;
+
+//==================================================================
+// Общие параметры =================================================
+//==================================================================
+
+body {
+   color: #5a6063;
+   font-family: "RobotoRegular";
+   font-size: 16px;
+   //чтобы не было скрола под меню
+   &._lock {
+      overflow: hidden;
+   }
+}
+
+// Оболочка экрана =================================================
+
+.wrapper {
+   width: 100%;
+   min-height: 100%;
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+}
+
+// Основная сетка ==================================================
+
+._container {
+   max-width: $MaxWidthContainer;
+   margin: 0 auto;
+   @media (max-width: $md1) {
+      max-width: 970px;
+   }
+   @media (max-width: $md2) {
+      max-width: 750px;
+   }
+   @media (max-width: $md3) {
+      max-width: none;
+      padding: 0 10px;
+   }
+}
+
+// Кнопки ==========================================================
+@import "forms";
+
+// Модальные окна ==================================================
+@import "popup";
+
+// Иконки ==========================================================
+
+[class^="_icon-"]::before,
+[class*=" _icon-"]::before {
+   /* use !important to prevent issues with browser extensions that change fonts */
+   font-family: "icomoon" !important;
+   font-style: normal;
+   font-weight: normal;
+   font-variant: normal;
+   text-transform: none;
+   line-height: 1;
+
+   /* Better Font Rendering =========== */
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+}
+
+._icon-tell::before {
+   content: "\e900";
+}
+
+._icon-user::before {
+   content: "\e901";
+}
+
+._accordeon {
+   // ._accordeon__icon
+   &__icon {
+      display: block;
+      position: relative;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      &::before,
+      &::after {
+         position: absolute;
+         height: 2px;
+         width: 100%;
+         transition: all 0.2s;
+         -moz-transition: all 0.2s;
+         -webkit-transition: all 0.2s;
+         -o-transition: all 0.2s;
+         background-color: #ffa400;
+         content: "";
+      }
+      &::before {
+         top: 14px;
+         height: 2px;
+         width: 100%;
+      }
+      &::after {
+         left: 14px;
+         height: 100%;
+         width: 2px;
+      }
+   }
+
+   // ._accordeon__content
+   &__content {
+      height: 0px;
+      overflow: hidden;
+      transition: all 0.2s;
+      -moz-transition: all 0.2s;
+      -webkit-transition: all 0.2s;
+      -o-transition: all 0.2s;
+   }
+
+   // ._accordeon__item
+   &__item {
+      &._active {
+         ._accordeon__icon {
+            &::after {
+               transform: rotate(90deg);
+            }
+         }
+      }
+   }
+}
+
+//==================================================================
+// Хедер ===========================================================
+//==================================================================
+
+.header {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   background: #fff;
+   box-shadow: 0px 1px 7px #9a9a9a;
+   z-index: 10;
+
+   // .header__container
+   &__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100px;
+      transition: all 0.2s;
+      -moz-transition: all 0.2s;
+      -webkit-transition: all 0.2s;
+      -o-transition: all 0.2s;
+      @media (max-width: $md3) {
+         height: 60px;
+      }
+   }
+
+   // .header__logo
+   &__logo {
+      padding-right: 20px;
+      @media (max-width: 439px) {
+         display: none;
+      }
+   }
+   // .header__logo-img
+   &__logo-img {
+      height: 70px;
+      transition: all 0.2s;
+      -moz-transition: all 0.2s;
+      -webkit-transition: all 0.2s;
+      -o-transition: all 0.2s;
+      @media (max-width: $md2) {
+         height: 45px;
+      }
+   }
+   // .header__menu
+   &__menu {
+      flex: 1 1 auto;
+      position: relative;
+   }
+   &__menu._hide {
+      display: none;
+   }
+   // .header__contacts
+   &__contacts {
+      flex-basis: 260px;
+      flex-shrink: 0;
+      padding-left: 20px;
+   }
+
+   // .header__phone
+   &__phone {
+      font-size: 26px;
+      text-align: right;
+      padding-bottom: 15px;
+      transition: all 0.2s;
+      -moz-transition: all 0.2s;
+      -webkit-transition: all 0.2s;
+      -o-transition: all 0.2s;
+      @media (max-width: $md3) {
+         padding-bottom: 0px;
+      }
+   }
+
+   // .header__phone-link
+   &__phone-link {
+      color: #5a6063;
+      cursor: default;
+      &::before {
+         font-size: 22px;
+         margin-right: 10px;
+         color: #ffa400;
+      }
+   }
+
+   // .header__callback
+   &__callback {
+      font-family: "RobotoBold";
+      text-align: right;
+      font-size: 15px;
+      @media (max-width: $md3) {
+         display: none;
+      }
+   }
+
+   // .header__callback-link
+   &__callback-link {
+      color: #ffa400;
+      text-transform: uppercase;
+
+      &:hover {
+         color: #c88400;
+      }
+      transition: all 0.2s;
+      -moz-transition: all 0.2s;
+      -webkit-transition: all 0.2s;
+      -o-transition: all 0.2s;
+   }
+}
+
+.header._small {
+   .header__container {
+      height: 60px;
+   }
+   .header__logo-img {
+      height: 45px;
+   }
+   .header__callback {
+      display: none;
+   }
+   .header__phone {
+      padding-bottom: 0px;
+   }
+   @media (min-width: $md3) {
+      .menu__body {
+         padding-top: 0px;
+      }
+   }
+   @media (min-width: $md3) {
+      .menu__body {
+         padding-top: 0px;
+      }
+   }
+}
+
+// Меню ===========================================================
+
+.menu {
+   // .menu__body
+   &__body {
+      padding-top: 40px;
+      @media (max-width: $md3) {
+         padding-top: 0px;
+         position: fixed;
+         left: -100%;
+         top: 60px;
+         width: 100%;
+         height: 100%;
+         background-color: #182420;
+         padding: 50px 30px 30px 30px;
+         z-index: 3;
+         //важно, чтобы была прокрутка, если меню не влезает
+         overflow: auto;
+         transition: all 0.2s;
+         -moz-transition: all 0.2s;
+         -webkit-transition: all 0.2s;
+         -o-transition: all 0.2s;
+      }
+   }
+
+   &__body._active {
+      left: 0;
+      &::before {
+         left: 0;
+      }
+   }
+
+   // .menu__list
+   &__list {
+      display: flex;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      padding-right: 50px;
+      font-size: 15px;
+
+      transition: all 0.2s;
+      -moz-transition: all 0.2s;
+      -webkit-transition: all 0.2s;
+      -o-transition: all 0.2s;
+
+      @media (max-width: $md2) {
+         padding-right: 0px;
+      }
+      @media (max-width: $md3) {
+         flex-direction: column;
+         align-items: center;
+         li {
+            margin: 0 0 50px;
+         }
+      }
+   }
+
+   // .menu__item
+   &__item {
+      padding-right: 10px;
+      &._mobile {
+         @media (min-width: 440px) {
+            display: none;
+         }
+      }
+   }
+
+   // .menu__link
+   &__link {
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #666;
+      padding: 5px;
+      &:hover {
+         color: #f7a300;
+      }
+      transition: all 0.2s;
+      -moz-transition: all 0.2s;
+      -webkit-transition: all 0.2s;
+      -o-transition: all 0.2s;
+      @media (max-width: $md3) {
+         color: #fff;
+         font-size: 24px;
+      }
+   }
+
+   // .menu__icon
+   &__icon {
+      display: none;
+      z-index: 20;
+      cursor: pointer;
+      @media (max-width: $md3) {
+         display: block;
+         position: relative;
+         width: 30px;
+         height: 22px;
+         cursor: pointer;
+         &::before,
+         &::after,
+         span {
+            left: 0;
+            position: absolute;
+            height: 10%;
+            width: 100%;
+            transition: all 0.2s;
+            -moz-transition: all 0.2s;
+            -webkit-transition: all 0.2s;
+            -o-transition: all 0.2s;
+            background-color: #666;
+         }
+         &::before,
+         &::after {
+            content: "";
+         }
+         &::before {
+            top: 0;
+         }
+         &::after {
+            bottom: 0;
+         }
+         span {
+            top: 50%;
+            transform: scale(1) translate(0px, -50%);
+         }
+      }
+      &._active span {
+         transform: scale(0) translate(0px, -50%);
+      }
+      &._active::before {
+         top: 50%;
+         transform: rotate(-45deg) translate(0px, -50%);
+      }
+      &._active::after {
+         bottom: 50%;
+         transform: rotate(45deg) translate(0px, 50%);
+      }
+   }
+}
+
+//==================================================================
+// Контент =========================================================
+//==================================================================
+
+._ibg {
+   background-position: center;
+   background-size: cover;
+   background-repeat: no-repeat;
+   position: relative;
+   img {
+      width: 100%;
+      height: auto;
+      position: absolute;
+      top: 0;
+      left: 0;
+   }
+}
+
+._line {
+   &::after {
+      position: absolute;
+      width: 50%;
+      height: 3px;
+      bottom: -15px;
+      left: 25%;
+      content: "";
+      background: #ffcc00;
+   }
+}
+
+._header-2 {
+   font-size: 38px;
+   color: #36393b;
+   margin-bottom: 30px;
+   font-family: "RobotoBold";
+   position: relative;
+   @media (max-width: $md2) {
+      font-size: 32px;
+   }
+   @media (max-width: $md3) {
+      font-size: 28px;
+   }
+}
+
+._header-2-span {
+   display: block;
+   max-width: 650px;
+   margin: 0 auto;
+   font-size: 20px;
+   @media (max-width: $md2) {
+      font-size: 18px;
+   }
+}
+
+._white {
+   color: white;
+}
+
+// Главный экран =======================================================
+//======================================================================
+
+// прижимаем футер давая контенту занимать все свободное место
+.page {
+   flex: 1 1 auto;
+}
+
+.main_page {
+   background: #182420;
+   overflow: hidden;
+   margin: 0 auto;
+   padding-top: 100px;
+   border-bottom: 2px solid #bbb;
+   color: #fff;
+   @media (max-width: $md3) {
+      padding-top: 60px;
+   }
+
+   // .main_page__container
+   &__container {
+      display: flex;
+      flex-wrap: wrap;
+   }
+
+   // .main_page__header
+   &__header {
+      flex: 0 1 100%;
+      text-align: center;
+      padding-top: 55px;
+      padding-bottom: 50px;
+      h1 {
+         font-family: "RobotoBold";
+         font-size: 36px;
+         text-transform: uppercase;
+         margin-bottom: 30px;
+         position: relative;
+         @media (max-width: $md2) {
+            font-size: 32px;
+         }
+         @media (max-width: $md3) {
+            font-size: 26px;
+         }
+      }
+      span {
+         font-family: "RobotoBold";
+         font-size: 22px;
+         text-transform: uppercase;
+         @media (max-width: $md2) {
+            font-size: 20px;
+         }
+         @media (max-width: $md3) {
+            font-size: 16px;
+         }
+      }
+   }
+
+   // .main_page__advantages
+   &__advantages {
+      flex: 0 1 45%;
+      margin-bottom: 40px;
+      @media (max-width: $md3) {
+         flex: 0 1 100%;
+         display: flex;
+         justify-content: center;
+         flex-direction: column;
+         align-items: center;
+      }
+   }
+
+   // .main_page__advantages-list
+   &__advantages-list {
+      padding-right: 20px;
+      @media (max-width: $md3) {
+         padding-right: 0;
+         text-align: left;
+         max-width: 300px;
+      }
+   }
+
+   // .main_page__advantages-item
+   &__advantages-item {
+      font-size: 18px;
+      margin-bottom: 25px;
+      margin-left: 60px;
+      position: relative;
+      &::before {
+         //content: "\00BB";
+         content: "";
+         background: url(../img/galka.png) no-repeat;
+         position: absolute;
+         width: 40px;
+         height: 40px;
+         top: 0;
+         left: -60px;
+         @media (max-width: $md2) {
+            width: 30px;
+            height: 30px;
+            background-size: 30px;
+            left: -40px;
+         }
+      }
+      &:last-child {
+         margin-bottom: 0px;
+      }
+      @media (max-width: $md2) {
+         font-size: 16px;
+         margin-left: 40px;
+      }
+   }
+
+   // .main_page__order
+   &__order {
+      margin: 35px 10px 10px 60px;
+      @media (max-width: $md2) {
+         margin-left: 40px;
+      }
+      @media (max-width: $md3) {
+         margin-left: 0;
+      }
+   }
+
+   // .main_page__image
+   &__image {
+      flex: 0 1 55%;
+      min-height: 250px;
+      @media (max-width: $md3) {
+         display: none;
+      }
+   }
+}
+
+// Услуги ==============================================================
+//======================================================================
+
+.services {
+   overflow: hidden;
+   margin: 0 auto;
+   // .services__container
+   &__container {
+      padding-top: 60px;
+      padding-bottom: 60px;
+      @media (max-width: $md3) {
+         padding-top: 50px;
+         padding-bottom: 50px;
+      }
+   }
+
+   // .services__header
+   &__header {
+      text-align: center;
+   }
+
+   // .services__list
+   &__list {
+      display: grid;
+      column-gap: 10px;
+      row-gap: 50px;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      grid-auto-rows: 1fr; // для одинаковой высоты карточек
+      padding-top: 50px;
+      @media (max-width: $md2) {
+         grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      }
+      @media (max-width: $md3) {
+         grid-template-columns: 310px;
+         justify-content: center;
+      }
+      @media (max-width: 360px) {
+         grid-template-columns: 230px;
+      }
+   }
+
+   // .services__item
+   &__item {
+      display: grid;
+      grid-auto-flow: row;
+      grid-template: 1fr auto minmax(30px, 50px) 40px 42px / 1fr;
+      text-align: center;
+      h3 {
+         font-size: 20px;
+         font-family: "RobotoMedium";
+         color: #36393b;
+         margin-bottom: 30px;
+         @media (max-width: $md2) {
+            font-size: 18px;
+         }
+         position: relative;
+         &::after {
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: -15px;
+            left: 0;
+            content: "";
+            background: #ffcc00;
+         }
+      }
+      img {
+         margin: 0 auto;
+         max-height: 130px;
+         @media (max-width: $md2) {
+            max-height: 100px;
+         }
+      }
+      p {
+         margin: 0 20px 0 20px;
+      }
+      span {
+         display: block;
+         font-size: 28px;
+         font-family: "RobotoBold";
+         color: #36393b;
+         @media (max-width: $md2) {
+            font-size: 24px;
+         }
+      }
+   }
+
+   // .services__order
+   &__order {
+      margin: 0 auto;
+   }
+}
+
+// Вызов эвакуатора ====================================================
+//======================================================================
+
+.call {
+   overflow: hidden;
+   margin: 0 auto;
+   background: #182420;
+   // .call__container
+   &__container {
+      display: flex;
+      align-items: center;
+      padding-top: 60px;
+      padding-bottom: 60px;
+      @media (max-width: $md3) {
+         flex-wrap: wrap;
+         justify-content: center;
+         padding-top: 50px;
+         padding-bottom: 50px;
+      }
+   }
+
+   // .call__image
+   &__image {
+      padding: 0 30px 0 30px;
+      @media (max-width: $md3) {
+         margin-bottom: 30px;
+      }
+      img {
+         max-width: 180px;
+         @media (max-width: $md3) {
+            max-width: 100px;
+         }
+      }
+   }
+
+   // .call__contacts
+   &__contacts {
+      flex: 1 1 auto;
+      text-align: center;
+      color: #fff;
+
+      h2 {
+         font-size: 38px;
+         font-family: "RobotoBold";
+         margin-bottom: 30px;
+         @media (max-width: $md2) {
+            font-size: 32px;
+         }
+         @media (max-width: $md3) {
+            font-size: 28px;
+         }
+      }
+      a {
+         display: block;
+         font-size: 42px;
+         color: #ffcc00;
+         margin-bottom: 30px;
+         @media (max-width: $md3) {
+            font-size: 36px;
+         }
+         @media (max-width: $md4) {
+            font-size: 32px;
+         }
+      }
+      p {
+         font-size: 24px;
+         @media (max-width: $md2) {
+            font-size: 20px;
+         }
+         @media (max-width: $md3) {
+            font-size: 18px;
+         }
+      }
+   }
+}
+
+// Преимущества ========================================================
+//======================================================================
+
+.pluses {
+   overflow: hidden;
+   margin: 0 auto;
+
+   // .pluses__container
+   &__container {
+      margin-top: 60px;
+      margin-bottom: 60px;
+      @media (max-width: $md3) {
+         margin-top: 50px;
+         margin-bottom: 50px;
+      }
+   }
+
+   // .pluses__header
+   &__header {
+      text-align: center;
+   }
+
+   // .pluses__list
+   &__list {
+      display: flex;
+      flex-wrap: wrap;
+      padding-top: 50px;
+   }
+
+   // .pluses__item
+   &__item {
+      flex: 1 1 50%;
+      margin-bottom: 40px;
+      line-height: 120%;
+      position: relative;
+      padding-left: 80px;
+      padding-right: 30px;
+      @media (max-width: 649px) {
+         flex: 1 1 100%;
+         &:last-child {
+            margin-bottom: 0px;
+         }
+      }
+      &::before {
+         content: counters(item, "") "";
+         counter-increment: item;
+         position: absolute;
+         left: 0px;
+         top: 0px;
+         font-size: 30px;
+         line-height: 60px;
+         width: 60px;
+         height: 60px;
+         background: url(../img/counter4.png) no-repeat;
+         text-align: center;
+      }
+      h3 {
+         font-family: "RobotoMedium";
+         font-size: 20px;
+         color: #36393b;
+         margin-bottom: 10px;
+      }
+   }
+}
+
+// Обратный звонок =====================================================
+//======================================================================
+
+.callback {
+   overflow: hidden;
+   margin: 0 auto;
+   background: #182420;
+
+   // .callback__container
+   &__container {
+      display: flex;
+      align-items: center;
+      padding-top: 60px;
+      padding-bottom: 60px;
+      @media (max-width: $md3) {
+         flex-wrap: wrap;
+         justify-content: center;
+         padding-top: 50px;
+         padding-bottom: 50px;
+      }
+   }
+
+   // callback__image
+   &__image {
+      padding: 0 30px 10px 30px;
+      @media (max-width: $md3) {
+         margin-bottom: 30px;
+      }
+      img {
+         max-width: 180px;
+         @media (max-width: $md3) {
+            max-width: 100px;
+         }
+      }
+   }
+
+   // .callback__contacts
+   &__contacts {
+      flex: 1 1 auto;
+      text-align: center;
+      color: #fff;
+      h2 {
+         font-size: 38px;
+         font-family: "RobotoBold";
+         margin-bottom: 30px;
+         @media (max-width: $md2) {
+            font-size: 32px;
+         }
+         @media (max-width: $md3) {
+            font-size: 28px;
+         }
+      }
+      span {
+         font-size: 24px;
+         @media (max-width: $md2) {
+            font-size: 20px;
+         }
+         @media (max-width: $md3) {
+            font-size: 18px;
+         }
+      }
+   }
+
+   // .callback__form
+   &__form {
+      padding: 30px 10px 0 10px;
+      input[type="tel"] {
+         margin-right: 50px;
+         @media (max-width: $md2) {
+            margin-right: 30px;
+            display: block;
+            margin: 0 auto 30px;
+         }
+      }
+   }
+   // .callback__input
+   &__input {
+      @media (max-width: $md3) {
+         width: 100%;
+      }
+   }
+}
+
+// Вопросы =============================================================
+//======================================================================
+
+.faq {
+   overflow: hidden;
+   margin: 0 auto;
+   // .faq__container
+   &__container {
+      margin-top: 60px;
+      margin-bottom: 60px;
+      @media (max-width: $md3) {
+         margin-top: 50px;
+         margin-bottom: 50px;
+      }
+   }
+
+   // .faq__header
+   &__header {
+      text-align: center;
+   }
+
+   // .faq__list
+   &__list {
+      display: flex;
+      flex-direction: column;
+      padding-top: 30px;
+   }
+
+   // .faq__item
+   &__item {
+      border-bottom: solid 1px #ddd;
+      padding: 25px 10px;
+      &:last-child {
+         margin-bottom: 0;
+      }
+      @media (max-width: $md3) {
+         padding: 15px 10px;
+      }
+   }
+   // .faq__title-body
+   &__title-body {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+   }
+
+   // .faq__title
+   &__title {
+      flex: 1 1 auto;
+      margin-right: 10px;
+      h3 {
+         flex: 1 1 auto;
+         font-family: "RobotoMedium";
+         font-size: 20px;
+         padding: 10px 0;
+         color: #36393b;
+         cursor: pointer;
+         &:hover {
+            color: #c88400;
+            transition: all 0.2s;
+            -moz-transition: all 0.2s;
+            -webkit-transition: all 0.2s;
+            -o-transition: all 0.2s;
+         }
+         @media (max-width: $md2) {
+         }
+      }
+      &._touch > h3:hover {
+         color: #36393b;
+      }
+   }
+
+   // .faq__title-icon
+   &__title-icon {
+      flex: 0 0 auto;
+   }
+
+   // .faq__content
+   &__content {
+      p {
+         margin-bottom: 10px;
+      }
+      ul {
+         margin-left: 20px;
+      }
+      li {
+         margin-bottom: 10px;
+      }
+   }
+}
+
+// Seo-текст ===========================================================
+//======================================================================
+
+.seotext {
+   overflow: hidden;
+   margin: 0 auto;
+   // .seotext__container
+   &__container {
+      padding-top: 60px;
+      padding-bottom: 60px;
+      @media (max-width: $md3) {
+         padding-top: 50px;
+         padding-bottom: 50px;
+      }
+   }
+
+   // .seotext__header
+   &__header {
+      text-align: center;
+   }
+
+   // .seotext__content
+   &__content {
+      padding-top: 30px;
+      height: 250px;
+      overflow: hidden;
+      transition: all 0.5s;
+      -moz-transition: all 0.5s;
+      -webkit-transition: all 0.5s;
+      -o-transition: all 0.5s;
+      position: relative;
+      --xxx: 2em;
+      &:after {
+         position: absolute;
+         content: "";
+         text-align: right;
+         position: absolute;
+         bottom: 0;
+         right: 0;
+         left: 0;
+         height: var(--xxx);
+         background: linear-gradient(to bottom, rgba(255, 255, 255, 0), white 100%);
+         pointer-events: none;
+      }
+
+      @media (max-width: $md3) {
+         padding-top: 20px;
+      }
+      h3 {
+         margin-bottom: 15px;
+         margin-top: 15px;
+         text-align: center;
+         font-family: "RobotoMedium";
+         font-size: 20px;
+         color: #36393b;
+      }
+      p {
+         margin-bottom: 15px;
+         line-height: 1.2;
+      }
+      ul {
+         margin-bottom: 15px;
+      }
+      li {
+         padding-left: 20px;
+         margin-left: 20px;
+         margin-bottom: 10px;
+         position: relative;
+         &::before {
+            position: absolute;
+            content: "»";
+            color: #ffcd00;
+            font-size: 30px;
+            left: 0;
+            top: -10px;
+         }
+      }
+   }
+   // .seotext__readmore
+   &__readmore {
+      padding-top: 20px;
+   }
+
+   // .seotext__readmore-link
+   &__readmore-link {
+      margin: 0 auto;
+   }
+}
+
+//==================================================================
+// Футер ===========================================================
+//==================================================================
+
+.footer {
+   background: #182420;
+   overflow: hidden;
+
+   // .footer__content
+   &__content {
+      display: flex;
+      flex-wrap: wrap;
+      padding-top: 60px;
+      padding-bottom: 40px;
+      @media (max-width: $md3) {
+         padding-top: 50px;
+         padding-bottom: 30px;
+      }
+   }
+
+   // .footer__header
+   &__header {
+      flex: 1 1 100%;
+      text-align: center;
+      margin-bottom: 60px;
+      @media (max-width: $md3) {
+         margin-bottom: 40px;
+      }
+   }
+
+   // .footer__phone
+   &__phone {
+      flex: 0 1 50%;
+      text-align: right;
+      color: #fff;
+      @media (max-width: 670px) {
+         flex: 0 1 100%;
+         text-align: center;
+      }
+      h3 {
+         font-size: 22px;
+         margin-bottom: 20px;
+      }
+      p {
+         margin-bottom: 10px;
+      }
+   }
+
+   // .footer__phone-link
+   &__phone-link {
+      font-size: 26px;
+      cursor: default;
+      color: #fff;
+      display: block;
+      margin-bottom: 20px;
+      &::before {
+         font-size: 0.9em;
+         margin-right: 14px;
+         color: #ffa400;
+      }
+   }
+
+   // .footer__order
+   &__order {
+      flex: 0 1 50%;
+      @media (max-width: 670px) {
+         flex: 0 1 100%;
+      }
+   }
+
+   // .footer_form
+   &__form {
+      @media (max-width: 670px) {
+         margin-bottom: 40px;
+         text-align: center;
+      }
+   }
+
+   // .footer__input
+   &__input {
+      margin-bottom: 20px;
+      width: 90%;
+      @media (max-width: 670px) {
+         width: 100%;
+      }
+   }
+
+   // .footer__copiright
+   &__copiright {
+      flex: 1 1 100%;
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 30px;
+      color: white;
+      line-height: 1.2em;
+      border-top: solid 1px #ffa400;
+   }
+}
+
+.thx_page {
+   background: #182420;
+   overflow: hidden;
+   margin: 0 auto;
+   padding-top: 100px;
+   border-bottom: 2px solid #bbb;
+   color: #fff;
+   min-height: 410px;
+   @media (max-width: $md3) {
+      padding-top: 60px;
+      min-height: 350px;
+   }
+
+   // .thx_page__container
+   &__container {
+      display: flex;
+      flex-wrap: wrap;
+   }
+
+   // .thx_page__header
+   &__header {
+      flex: 0 1 100%;
+      text-align: center;
+      padding-top: 100px;
+      padding-bottom: 50px;
+      h1 {
+         font-family: "RobotoBold";
+         font-size: 36px;
+         text-transform: uppercase;
+         margin-bottom: 30px;
+         position: relative;
+         @media (max-width: $md2) {
+            font-size: 32px;
+         }
+         @media (max-width: $md3) {
+            font-size: 26px;
+         }
+      }
+      span {
+         font-family: "RobotoBold";
+         font-size: 22px;
+         text-transform: uppercase;
+         @media (max-width: $md2) {
+            font-size: 20px;
+         }
+         @media (max-width: $md3) {
+            font-size: 16px;
+         }
+      }
+   }
+   // .thx_page__container
+   &__link {
+      padding-bottom: 50px;
+      margin: 0 auto;
+   }
+}
+
+.politics_page {
+   background: #182420;
+   overflow: hidden;
+   margin: 0 auto;
+   padding-top: 50px;
+   border-bottom: 2px solid #bbb;
+   color: #fff;
+   min-height: 410px;
+   font-size: 18px;
+   @media (max-width: $md3) {
+      padding-top: 30px;
+      min-height: 350px;
+      font-size: 16px;
+   }
+
+   // .politics_page__container
+   &__container {
+      display: flex;
+      flex-wrap: wrap;
+   }
+
+   // .politics_page__header
+   &__header {
+      flex: 0 1 100%;
+      text-align: center;
+      padding-top: 100px;
+      padding-bottom: 30px;
+      h1 {
+         font-family: "RobotoBold";
+         font-size: 36px;
+         text-transform: uppercase;
+         margin-bottom: 30px;
+         position: relative;
+         @media (max-width: $md2) {
+            font-size: 32px;
+         }
+         @media (max-width: $md3) {
+            font-size: 26px;
+         }
+         @media (max-width: $md3) {
+            font-size: 22px;
+         }
+      }
+   }
+
+   // .politics_page__text
+   &__text {
+      margin-bottom: 30px;
+      p {
+         margin-bottom: 30px;
+      }
+   }
+   // .politics_page__container
+   &__link {
+      padding-bottom: 50px;
+      margin: 0 auto;
+   }
+}
